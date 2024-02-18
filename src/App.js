@@ -1,24 +1,41 @@
-import logo from './logo.svg';
+
+import { ToastContainer } from 'react-toastify';
 import './App.css';
+import Login from './Login/Login';
+import 'react-toastify/dist/ReactToastify.css';
+import MainPage from './mainPage/MainPage';
+import {RouterProvider, createBrowserRouter} from 'react-router-dom';
+import SignUp from './SignUp/SignUp';
+import {  useSelector } from 'react-redux'
+import {  authSelector } from './redux/authReducer';
 
 function App() {
+
+  const {isLoggedIn}=useSelector(authSelector);
+
+  const router =createBrowserRouter([
+    {
+      path:'/',
+      children:[
+        {index:true,element:<Login />},
+        {
+          path:'/mainpage',element:<MainPage />
+        },
+        {
+          path:'/signup',element:!isLoggedIn && <SignUp />
+        }
+
+      ]
+    }
+  ])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ToastContainer autoClose={3000} />
+      <RouterProvider router={router}/>
     </div>
+  
   );
 }
 
