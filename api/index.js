@@ -22,8 +22,9 @@ app.use(bodyParser.json());
 
 const secretKey = generateSecretKey();
 
+//Connect MongoDB to your account , replace email id and password .
 
-mongoose.connect('mongodb+srv://adarshkumar57d:adarsh99@cluster0.ijjfdsm.mongodb.net/project1').then(()=>{
+mongoose.connect('mongodb+srv://"YOUR EMAIL ID HERE":"YOUR PASSWORD HERE"@cluster0.ijjfdsm.mongodb.net/project1').then(()=>{
     console.log("Connected to MongoDB");
 }).catch(()=>{
     console.log("Error connecting to MongoDB");
